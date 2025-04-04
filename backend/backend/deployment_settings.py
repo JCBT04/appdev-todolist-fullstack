@@ -9,7 +9,7 @@ CSRF_TRUSTED_ORIGINS = ['https://'+os.environ.get('RENDER_EXTERNAL_HOSTNAME')]
 
 DEBUG = False
 
-SECRET_KEY = os.environ.get['SECRET_KEY']
+SECRET_KEY = os.environ.get['ea2b078fcc036bb2a0e9d0a87853ea77']
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 
-const API_URL = "http://localhost:8000/api/todo/";
+const API_URL = window.location.hostname === "localhost" 
+  ? "http://localhost:8000/api/todo/"  // Local development API URL
+  : "https://appdev-todolist-fullstack.onrender.com/api/todo/";  // Render production API URL
 
 export default function TodoList() {
     const [tasks, setTasks] = useState([]);

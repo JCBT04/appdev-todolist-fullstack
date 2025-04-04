@@ -1,10 +1,7 @@
 import { useState, useEffect } from "react";
 
-// const API_URL = window.location.hostname === "localhost" 
-//   ? "http://localhost:8000/api/todo/"  // Local development API URL
-//   : "https://appdev-todolist-fullstack.onrender.com/api/todo/";  // Render production API URL
-
-const API_URL = "https://appdev-todolist-fullstack.onrender.com"
+// Use environment variable or fallback to production URL for API URL
+const API_URL = process.env.REACT_APP_API_URL || "https://appdev-todolist-fullstack.onrender.com/api/todo/";
 
 export default function TodoList() {
     const [tasks, setTasks] = useState([]);
@@ -19,7 +16,10 @@ export default function TodoList() {
         fetch(API_URL)
             .then(res => res.json())
             .then(data => setTasks(data))
-            .catch(err => console.error("Fetch error:", err));
+            .catch(err => {
+                console.error("Fetch error:", err);
+                alert("There was an issue fetching the tasks.");
+            });
     }, []);
 
     useEffect(() => {

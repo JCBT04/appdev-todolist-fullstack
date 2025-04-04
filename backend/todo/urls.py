@@ -1,9 +1,9 @@
-from django.urls import path, include
+from django.urls import path
 from rest_framework.routers import DefaultRouter
-from .views import TodoViewSet  # Import the TodoViewSet here
+from .views import TodoViewSet
 
 router = DefaultRouter()
-router.register(r'todo', TodoViewSet)  # Register TodoViewSet for the 'todo' path
+router.register(r'todo', TodoViewSet)  # Register the TodoViewSet for the 'todo' path
 
 urlpatterns = [
     path('', include(router.urls)),  # Use the router to handle the API routes

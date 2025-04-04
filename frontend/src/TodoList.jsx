@@ -15,7 +15,10 @@ export default function TodoList() {
     useEffect(() => {
         fetch(API_URL)
             .then(res => res.json())
-            .then(data => setTasks(data))
+            .then(data => {
+                console.log("Fetched tasks:", data);  // Check if the tasks are fetched correctly
+                setTasks(data);
+            })
             .catch(err => {
                 console.error("Fetch error:", err);
                 alert("There was an issue fetching the tasks.");
@@ -40,7 +43,7 @@ export default function TodoList() {
             body: JSON.stringify({ title: task, completed: false })
         })
         .then(res => res.json())
-        .then(newTask => setTasks([...tasks, newTask]))
+        .then(newTask => setTasks(prevTasks => [...prevTasks, newTask]))  // Corrected state update
         .catch(err => console.error("Add task error:", err));
 
         setTask("");
@@ -71,7 +74,7 @@ export default function TodoList() {
 
     const startEditing = (index) => {
         setEditingIndex(index);
-        setEditingText(tasks[index].title);  // Ensure we use 'title'
+        setEditingText(tasks[index].title);
     };
 
     const cancelEditing = () => {
@@ -86,7 +89,7 @@ export default function TodoList() {
         fetch(`${API_URL}${todo.id}/`, {
             method: "PUT",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ ...todo, title: editingText })  // Ensure we use 'title'
+            body: JSON.stringify({ ...todo, title: editingText })
         })
         .then(res => res.json())
         .then(updated => {
@@ -166,7 +169,7 @@ export default function TodoList() {
                                         onClick={() => toggleTaskCompletion(t)}
                                         style={{ textDecoration: t.completed ? "line-through" : "none" }}
                                     >
-                                        {t.title}  {/* Use 'title' instead of 'text' */}
+                                        {t.title}
                                     </span>
                                 )}
                                 <div className="task-actions">

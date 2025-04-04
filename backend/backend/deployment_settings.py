@@ -9,7 +9,7 @@ CSRF_TRUSTED_ORIGINS = ['https://'+os.environ.get('RENDER_EXTERNAL_HOSTNAME')]
 
 DEBUG = False
 
-SECRET_KEY = os.environ.get('ea2b078fcc036bb2a0e9d0a87853ea77')
+SECRET_KEY = os.environ.get('SECRET_KEY')
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -23,10 +23,9 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-# CORS_ALLOWED_ORIGINS = [
-#     "http://localhost:3000",  # React frontend (local development)
-#     "http://localhost:5173",  # Deployed frontend
-# ]
+CORS_ALLOWED_ORIGINS = [
+    "https://appdev-todolist-fullstack.onrender.com"
+]
 
 STORAGES ={
      "default":{
@@ -40,7 +39,7 @@ STORAGES ={
 
 DATABASES = {
     'default': dj_database_url.config(
-        default= os.environ['DATABASE_URL'], 
+        default=os.environ['DATABASE_URL'],  # This should be the environment variable name
         conn_max_age=600
     )
 }

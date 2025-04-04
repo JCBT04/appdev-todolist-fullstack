@@ -41,7 +41,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'todo.urls'
+ROOT_URLCONF = 'backend.urls'
 
 TEMPLATES = [
     {
@@ -63,7 +63,10 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 
 
 CORS_ALLOWED_ORIGINS = [
-    'http://localhost:5173'
+    'http://localhost:5173',
+    "http://localhost:3000"
+
+
 ]
 
 STATIC_ROOT = BASE_DIR/'staticfiles'
